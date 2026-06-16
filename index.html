@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>RS SALON | Premium Women's Salon & Beauty Parlour</title>
+  <meta name="description" content="Reveal Your Most Beautiful Self. Experience luxury beauty treatments designed exclusively for women in Bhubaneswar. Premium salon services.">
+  <meta name="keywords" content="salon, beauty parlour, women salon, bridal makeup, facial, haircut, Bhubaneswar, RS Salon">
+  <meta name="author" content="RS SALON">
+  <meta name="robots" content="index, follow">
+  
+  <!-- Open Graph / Social Media -->
+  <meta property="og:title" content="RS SALON | Premium Women's Salon & Beauty Parlour">
+  <meta property="og:description" content="Reveal Your Most Beautiful Self. Luxury beauty treatments exclusively for women.">
+  <meta property="og:image" content="https://placehold.co/1200x630/f7e7e7/B76E79?text=RS+SALON">
+  <meta property="og:url" content="https://rssalon.com">
+  <meta property="og:type" content="website">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💇‍♀️</text></svg>">
+  
+  <!-- Google Fonts + Font Awesome -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&family=Playfair+Display:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  
+  <!-- AOS (Animate on Scroll) CDN -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #FFFFFF;
+      color: #111111;
+      overflow-x: hidden;
+      scroll-behavior: smooth;
+    }
+
+    h1, h2, h3, h4, .logo-font, .heading-font {
+      font-family: 'Playfair Display', serif;
+    }
+
+    /* Custom Color Palette */
+    :root {
+      --primary: #111111;
+      --secondary: #B76E79;
+      --accent: #D4AF37;
+      --soft-pink: #F7E7E7;
+      --white: #FFFFFF;
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #f1f1f1;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #B76E79;
+      border-radius: 10px;
+    }
+
+    /* Glassmorphism & Effects */
+    .glass-nav {
+      background: rgba(255,255,255,0.96);
+      backdrop-filter: blur(12px);
+      transition: all 0.3s ease;
+    }
+    
+    .btn-primary {
+      background: #B76E79;
+      color: white;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 14px 0 rgba(183,110,121,0.3);
+    }
+    .btn-primary:hover {
+      background: #9a5a63;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(183,110,121,0.4);
+    }
+    
+    .btn-outline {
+      border: 2px solid #111111;
+      color: #111111;
+      transition: all 0.3s ease;
+    }
+    .btn-outline:hover {
+      background: #111111;
+      color: white;
+      transform: translateY(-2px);
+    }
+
+    .service-card {
+      background: linear-gradient(135deg, #FFFFFF 0%, #FCF8F8 100%);
+      border: 1px solid rgba(183,110,121,0.1);
+      transition: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+    }
+    .service-card:hover {
+      transform: translateY(-8px);
+      border-color: rgba(183,110,121,0.3);
+      box-shadow: 0 25px 40px -12px rgba(0,0,0,0.15);
+    }
+
+    .testimonial-card {
+      background: white;
+      border-radius: 24px;
+      transition: all 0.3s;
+      padding: 2rem;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    }
+
+    /* Floating Animation */
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-20px); }
+    }
+    .float-element {
+      animation: float 6s ease-in-out infinite;
+    }
+    .float-delayed {
+      animation: float 6s ease-in-out 2s infinite;
+    }
+
+    /* Gallery Zoom Effect */
+    .gallery-item {
+      overflow: hidden;
+      border-radius: 20px;
+      cursor: pointer;
+    }
+    .gallery-item img {
+      transition: transform 0.5s ease;
+      width: 100%;
+      height: 300px;
+      object-fit: cover;
+      border-radius: 20px;
+    }
+    .gallery-item:hover img {
+      transform: scale(1.08);
+    }
+
+    /* Lightbox */
+    .lightbox {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.9);
+      z-index: 1000;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+    }
+    .lightbox.active {
+      display: flex;
+    }
+    .lightbox img {
+      max-width: 90%;
+      max-height: 90%;
+      border-radius: 12px;
+    }
+    
+    /* Star rating styling */
+    .stars {
+      color: #D4AF37;
+      font-size: 1.2rem;
+      letter-spacing: 3px;
+      margin-bottom: 1rem;
+    }
+    .stars i {
+      margin-right: 2px;
+    }
+
+    /* Mobile Responsive */
+    @media (max-width: 768px) {
+      .hero-title {
+        font-size: 2.75rem;
+      }
+      .nav-links {
+        display: none;
+      }
+      .mobile-menu.active {
+        display: flex;
+      }
+      .gallery-item img {
+        height: 220px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- LIGHTBOX -->
+<div id="lightbox" class="lightbox" onclick="closeLightbox()">
+  <img id="lightbox-img" src="" alt="Enlarged view">
+</div>
+
+<!-- STICKY NAVBAR -->
+<nav id="navbar" style="position: fixed; top:0; left:0; width:100%; z-index:1000; transition: all 0.3s; background: rgba(255,255,255,0.98); backdrop-filter: blur(10px); box-shadow: 0 2px 15px rgba(0,0,0,0.05);">
+  <div class="container" style="max-width:1280px; margin:0 auto; padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center;">
+    <div class="logo" style="display: flex; align-items: center; gap: 0.5rem;">
+      <i class="fas fa-spa" style="color: #D4AF37; font-size: 1.8rem;"></i>
+      <span style="font-family: 'Playfair Display'; font-size: 1.6rem; font-weight: 700; color:#111;">RS SALON</span>
+    </div>
+    <div class="nav-links" style="display: flex; gap: 2rem; align-items: center;">
+      <a href="#home" style="text-decoration: none; color:#111; font-weight:500;">Home</a>
+      <a href="#services" style="text-decoration: none; color:#111; font-weight:500;">Services</a>
+      <a href="#about" style="text-decoration: none; color:#111; font-weight:500;">About</a>
+      <a href="#gallery" style="text-decoration: none; color:#111; font-weight:500;">Gallery</a>
+      <a href="#contact" style="text-decoration: none; color:#111; font-weight:500;">Contact</a>
+      <a href="#booking" class="btn-primary" style="padding: 0.6rem 1.5rem; border-radius: 40px; text-decoration: none; font-weight:600;">Book Now</a>
+    </div>
+    <div class="mobile-menu-icon" style="font-size: 1.8rem; cursor: pointer; display: none;" onclick="toggleMobileMenu()">
+      <i class="fas fa-bars"></i>
+    </div>
+  </div>
+  <!-- Mobile Dropdown -->
+  <div id="mobileMenu" style="display: none; flex-direction: column; background: white; padding: 1rem 2rem; gap: 1rem; border-top: 1px solid #eee;">
+    <a href="#home" style="text-decoration: none; color:#111;">Home</a>
+    <a href="#services" style="text-decoration: none; color:#111;">Services</a>
+    <a href="#about" style="text-decoration: none; color:#111;">About</a>
+    <a href="#gallery" style="text-decoration: none; color:#111;">Gallery</a>
+    <a href="#contact" style="text-decoration: none; color:#111;">Contact</a>
+    <a href="#booking" class="btn-primary" style="text-align: center; padding: 0.6rem; border-radius: 40px; text-decoration: none;">Book Now</a>
+  </div>
+</nav>
+
+<!-- HERO SECTION -->
+<section id="home" style="min-height: 100vh; display: flex; align-items: center; justify-content: center; position: relative; background: linear-gradient(135deg, #FFFFFF 0%, #F7E7E7 100%); overflow: hidden; padding-top: 80px;">
+  <!-- Floating Decor -->
+  <div class="float-element" style="position: absolute; top: 15%; left: 5%; opacity: 0.2;"><i class="fas fa-fan" style="font-size: 5rem; color:#B76E79;"></i></div>
+  <div class="float-delayed" style="position: absolute; bottom: 15%; right: 5%; opacity: 0.2;"><i class="fas fa-feather-alt" style="font-size: 6rem; color:#D4AF37;"></i></div>
+  
+  <div class="container" style="max-width: 1200px; margin: 0 auto; padding: 2rem; text-align: center; z-index: 2;" data-aos="fade-up">
+    <span style="background: rgba(183,110,121,0.12); padding: 0.5rem 1.2rem; border-radius: 40px; color: #B76E79; font-weight: 600; letter-spacing: 1px; display: inline-block; margin-bottom: 1.5rem;">Female's Exclusive Premium Salon</span>
+    <h1 class="hero-title" style="font-size: 4rem; font-weight: 800; color: #111111; margin-bottom: 1rem;">Reveal Your<br><span style="color: #B76E79;">Most Beautiful Self</span></h1>
+    <p style="font-size: 1.2rem; color: #4a4a4a; max-width: 600px; margin: 0 auto 2rem;">Experience luxury beauty treatments designed exclusively for women.</p>
+    <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+      <a href="#booking" class="btn-primary" style="padding: 1rem 2.2rem; border-radius: 50px; text-decoration: none; font-weight: 600; display: inline-flex; align-items: center; gap: 0.5rem;">Book Appointment <i class="fas fa-arrow-right"></i></a>
+      <a href="#services" class="btn-outline" style="padding: 1rem 2.2rem; border-radius: 50px; text-decoration: none; font-weight: 600;">Explore Services</a>
+    </div>
+  </div>
+  <!-- scroll indicator -->
+  <div style="position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%); animation: bounce 2s infinite;">
+    <i class="fas fa-chevron-down" style="color: #B76E79; font-size: 1.5rem;"></i>
+  </div>
+</section>
+
+<!-- STATISTICS SECTION (Animated Counters) -->
+<section style="padding: 4rem 2rem; background: white;">
+  <div class="container" style="max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px,1fr)); gap: 2rem; text-align: center;">
+    <div data-aos="zoom-in" style="padding: 1.5rem;">
+      <i class="fas fa-star" style="font-size: 2.5rem; color: #D4AF37;"></i>
+      <h3 style="font-size: 2.5rem; font-weight: 700; margin: 0.5rem 0;"><span class="counter" data-target="4.8">0</span>/5</h3>
+      <p>Google Rating</p>
+    </div>
+    <div data-aos="zoom-in" data-aos-delay="100" style="padding: 1.5rem;">
+      <i class="fas fa-smile" style="font-size: 2.5rem; color: #B76E79;"></i>
+      <h3 style="font-size: 2.5rem; font-weight: 700; margin: 0.5rem 0;"><span class="counter" data-target="65">0</span>+</h3>
+      <p>Happy Reviews</p>
+    </div>
+    <div data-aos="zoom-in" data-aos-delay="200" style="padding: 1.5rem;">
+      <i class="fas fa-user-tie" style="font-size: 2.5rem; color: #D4AF37;"></i>
+      <h3 style="font-size: 2.5rem; font-weight: 700; margin: 0.5rem 0;"><span class="counter" data-target="15">0</span>+</h3>
+      <p>Beauty Experts</p>
+    </div>
+    <div data-aos="zoom-in" data-aos-delay="300" style="padding: 1.5rem;">
+      <i class="fas fa-gem" style="font-size: 2.5rem; color: #B76E79;"></i>
+      <h3 style="font-size: 2.5rem; font-weight: 700; margin: 0.5rem 0;"><span class="counter" data-target="30">0</span>+</h3>
+      <p>Premium Services</p>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES SECTION -->
+<section id="services" style="padding: 5rem 2rem; background: #FCF9F9;">
+  <div class="container" style="max-width: 1280px; margin: 0 auto;">
+    <div style="text-align: center; margin-bottom: 3rem;" data-aos="fade-down">
+      <h2 style="font-size: 2.8rem; font-weight: 700;">Our Premium Services</h2>
+      <div style="width: 80px; height: 3px; background: #B76E79; margin: 1rem auto;"></div>
+      <p style="color: #555;">Luxury treatments tailored for your radiance</p>
+    </div>
+    <div class="services-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px,1fr)); gap: 2rem;">
+      <div class="service-card" data-aos="fade-up" style="background: white; border-radius: 24px; padding: 1.8rem; box-shadow: 0 5px 20px rgba(0,0,0,0.02);">
+        <i class="fas fa-cut" style="font-size: 2.5rem; color: #B76E79; margin-bottom: 1rem;"></i>
+        <h3 style="font-size: 1.5rem;">Haircuts & Styling</h3>
+        <p style="color: #666; margin: 0.5rem 0;">Expert cuts and styling for every hair type</p>
+        <p style="font-weight: 700; margin: 1rem 0;">Starting ₹700</p>
+        <a href="#booking" style="display: inline-block; background: #111; color: white; padding: 0.5rem 1.2rem; border-radius: 40px; text-decoration: none; font-size: 0.9rem;">Book Now</a>
+      </div>
+      <div class="service-card" data-aos="fade-up" data-aos-delay="50"><i class="fas fa-spa" style="font-size: 2.5rem; color: #B76E79;"></i><h3>Hair Spa</h3><p>Deep conditioning & scalp treatment</p><p style="font-weight:700;">₹900</p><a href="#booking" style="background:#111; color:white; padding:0.5rem 1.2rem; border-radius:40px; text-decoration:none; display:inline-block;">Book Now</a></div>
+      <div class="service-card" data-aos="fade-up" data-aos-delay="100"><i class="fas fa-palette" style="font-size: 2.5rem; color:#B76E79;"></i><h3>Hair Coloring</h3><p>Premium color solutions & highlights</p><p style="font-weight:700;">₹1500</p><a href="#booking" style="background:#111; color:white; padding:0.5rem 1.2rem; border-radius:40px; text-decoration:none;">Book Now</a></div>
+      <div class="service-card" data-aos="fade-up" data-aos-delay="150"><i class="fas fa-crown" style="font-size:2.5rem; color:#B76E79;"></i><h3>Bridal Makeup</h3><p>Flawless makeup for your special day</p><p style="font-weight:700;">₹5000+</p><a href="#booking" style="background:#111; color:white; padding:0.5rem 1.2rem; border-radius:40px;">Book Now</a></div>
+      <div class="service-card" data-aos="fade-up"><i class="fas fa-leaf" style="font-size:2.5rem; color:#B76E79;"></i><h3>Facials</h3><p>Rejuvenating skin treatments</p><p>₹800</p><a href="#booking" style="background:#111; color:white; padding:0.5rem 1.2rem; border-radius:40px;">Book Now</a></div>
+      <div class="service-card" data-aos="fade-up" data-aos-delay="50"><i class="fas fa-flask" style="font-size:2.5rem; color:#B76E79;"></i><h3>Stem Cell Facial</h3><p>Advanced anti-aging therapy</p><p>₹2500</p><a href="#booking" style="background:#111; color:white;">Book Now</a></div>
+      <div class="service-card" data-aos="fade-up"><i class="fas fa-eye" style="font-size:2.5rem; color:#B76E79;"></i><h3>Eyebrow Threading</h3><p>Perfect arch shaping</p><p>₹100</p><a href="#booking" style="background:#111; color:white; padding:0.5rem 1.2rem; border-radius:40px;">Book Now</a></div>
+      <div class="service-card" data-aos="fade-up"><i class="fas fa-wind" style="font-size:2.5rem;"></i><h3>Waxing</h3><p>Gentle & effective hair removal</p><p>₹350</p><a href="#booking" style="background:#111; color:white;">Book Now</a></div>
+      <div class="service-card" data-aos="fade-up"><i class="fas fa-hand-sparkles"></i><h3>Nail Services</h3><p>Manicure, pedicure & nail art</p><p>₹500</p><a href="#booking" style="background:#111; color:white;">Book Now</a></div>
+      <div class="service-card" data-aos="fade-up"><i class="fas fa-feet"></i><h3>Pedicure & Manicure</h3><p>Complete hand & foot care</p><p>₹600</p><a href="#booking" style="background:#111; color:white;">Book Now</a></div>
+      <div class="service-card" data-aos="fade-up"><i class="fas fa-gem"></i><h3>Skin Treatments</h3><p>Customized skincare solutions</p><p>₹1200</p><a href="#booking" style="background:#111; color:white;">Book Now</a></div>
+      <div class="service-card" data-aos="fade-up"><i class="fas fa-brush"></i><h3>Makeup Services</h3><p>Professional makeup for occasions</p><p>₹1500</p><a href="#booking" style="background:#111; color:white;">Book Now</a></div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY CHOOSE US -->
+<section id="about" style="padding: 5rem 2rem; background: white;">
+  <div class="container" style="max-width: 1200px; margin: 0 auto; text-align: center;">
+    <h2 data-aos="fade-up" style="font-size: 2.5rem;">Why Choose Us</h2>
+    <div style="width: 70px; height: 3px; background: #D4AF37; margin: 1rem auto;"></div>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px,1fr)); gap: 2rem; margin-top: 3rem;">
+      <div data-aos="flip-left"><i class="fas fa-user-check" style="font-size: 3rem; color:#B76E79;"></i><h3 style="margin-top:1rem;">Professional Staff</h3><p>Certified & experienced beauty experts</p></div>
+      <div data-aos="flip-left" data-aos-delay="100"><i class="fas fa-hand-holding-heart" style="font-size:3rem; color:#B76E79;"></i><h3>Hygienic Maintenance</h3><p>Sterilized tools & pristine environment</p></div>
+      <div data-aos="flip-left" data-aos-delay="200"><i class="fas fa-smile-beam" style="font-size:3rem; color:#B76E79;"></i><h3>Amazing Facial Results</h3><p>Visible glow & rejuvenation</p></div>
+      <div data-aos="flip-left" data-aos-delay="300"><i class="fas fa-feather-alt" style="font-size:3rem; color:#B76E79;"></i><h3>Pain-Free Threading</h3><p>Gentle on skin, perfect shapes</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIAL CAROUSEL (Fixed 5-star ratings) -->
+<section style="padding: 5rem 2rem; background: #F7E7E7;">
+  <div class="container" style="max-width: 1000px; margin: 0 auto; text-align: center;">
+    <h2 data-aos="fade-up">Loved by Our Clients</h2>
+    <div style="width: 60px; height: 3px; background:#B76E79; margin:1rem auto;"></div>
+    <div class="testimonial-slider" style="position: relative; overflow: hidden; margin-top: 2rem;">
+      <div id="testimonialTrack" style="display: flex; transition: transform 0.5s ease; gap: 1rem;">
+        <!-- Each testimonial now has full 5 stars -->
+        <div class="testimonial-card" style="min-width: 100%;">
+          <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+          <p style="margin:1rem 0; font-style:italic;">"Superb service, amazing experience and well trained staff."</p>
+          <h4 style="color:#B76E79;">- Pritika Tamang</h4>
+        </div>
+        <div class="testimonial-card" style="min-width: 100%;">
+          <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+          <p style="margin:1rem 0; font-style:italic;">"Wonderful experience, facial was amazing."</p>
+          <h4 style="color:#B76E79;">- Happy Customer</h4>
+        </div>
+        <div class="testimonial-card" style="min-width: 100%;">
+          <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+          <p style="margin:1rem 0; font-style:italic;">"Their threading method is painless and gives perfect eyebrow shape."</p>
+          <h4 style="color:#B76E79;">- Laxmi Magar</h4>
+        </div>
+        <div class="testimonial-card" style="min-width: 100%;">
+          <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+          <p style="margin:1rem 0; font-style:italic;">"All services are done well and hygienic maintenance is excellent."</p>
+          <h4 style="color:#B76E79;">- Minuti Bek</h4>
+        </div>
+        <div class="testimonial-card" style="min-width: 100%;">
+          <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+          <p style="margin:1rem 0; font-style:italic;">"Experts are excellent and their services are awesome."</p>
+          <h4 style="color:#B76E79;">- Nisha Gurung</h4>
+        </div>
+        <div class="testimonial-card" style="min-width: 100%;">
+          <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+          <p style="margin:1rem 0; font-style:italic;">"They were highly professional and serious about customer satisfaction."</p>
+          <h4 style="color:#B76E79;">- Travelling Lens</h4>
+        </div>
+      </div>
+      <div style="display: flex; justify-content: center; gap: 0.5rem; margin-top: 1.5rem;">
+        <span class="dot active" onclick="currentSlide(0)"></span>
+        <span class="dot" onclick="currentSlide(1)"></span>
+        <span class="dot" onclick="currentSlide(2)"></span>
+        <span class="dot" onclick="currentSlide(3)"></span>
+        <span class="dot" onclick="currentSlide(4)"></span>
+        <span class="dot" onclick="currentSlide(5)"></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY SECTION -->
+<section id="gallery" style="padding: 5rem 2rem; background: white;">
+  <div class="container" style="max-width: 1280px; margin: 0 auto; text-align: center;">
+    <h2 data-aos="fade-up">Our Glamorous Gallery</h2>
+    <div style="width: 80px; height: 3px; background: #B76E79; margin: 1rem auto;"></div>
+    <div class="gallery-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px,1fr)); gap: 1.5rem; margin-top: 2rem;">
+      <div class="gallery-item" onclick="openLightbox('https://placehold.co/600x800/f7e7e7/B76E79?text=Luxury+Interior')"><img src="https://placehold.co/600x500/f7e7e7/B76E79?text=Salon+Interior" alt="Salon Interior"></div>
+      <div class="gallery-item" onclick="openLightbox('https://placehold.co/600x800/f7e7e7/D4AF37?text=Hair+Styling+Expert')"><img src="https://placehold.co/600x500/f7e7e7/D4AF37?text=Hair+Styling" alt="Hair Styling"></div>
+      <div class="gallery-item" onclick="openLightbox('https://placehold.co/600x800/f7e7e7/B76E79?text=Bridal+Makeup+Look')"><img src="https://placehold.co/600x500/f7e7e7/B76E79?text=Bridal+Makeup" alt="Bridal Makeup"></div>
+      <div class="gallery-item" onclick="openLightbox('https://placehold.co/600x800/f7e7e7/D4AF37?text=Advanced+Facial')"><img src="https://placehold.co/600x500/f7e7e7/D4AF37?text=Facial+Treatment" alt="Facial Treatment"></div>
+      <div class="gallery-item" onclick="openLightbox('https://placehold.co/600x800/f7e7e7/B76E79?text=Premium+Services')"><img src="https://placehold.co/600x500/f7e7e7/B76E79?text=Beauty+Services" alt="Beauty Services"></div>
+      <div class="gallery-item" onclick="openLightbox('https://placehold.co/600x800/f7e7e7/D4AF37?text=Happy+Customer')"><img src="https://placehold.co/600x500/f7e7e7/D4AF37?text=Customer+Experience" alt="Customer Experience"></div>
+    </div>
+  </div>
+</section>
+
+<!-- APPOINTMENT BOOKING -->
+<section id="booking" style="padding: 5rem 2rem; background: linear-gradient(120deg, #FCF8F8, #fff);">
+  <div class="container" style="max-width: 800px; margin: 0 auto; background: white; border-radius: 48px; padding: 2.5rem; box-shadow: 0 20px 40px rgba(0,0,0,0.05);">
+    <h2 style="text-align: center; font-size: 2rem;">Book Your Luxury Experience</h2>
+    <form id="bookingForm" onsubmit="handleBooking(event)">
+      <div style="display: grid; gap: 1rem; margin-top: 2rem;">
+        <input type="text" id="fullName" placeholder="Full Name" required style="padding: 1rem; border-radius: 60px; border: 1px solid #ddd;">
+        <input type="tel" id="phone" placeholder="Phone Number" required style="padding: 1rem; border-radius: 60px;">
+        <select id="serviceSelect" required style="padding: 1rem; border-radius: 60px;"><option value="">Choose Service</option><option>Haircut & Styling</option><option>Bridal Makeup</option><option>Facial</option><option>Hair Spa</option><option>Waxing</option></select>
+        <input type="date" id="appDate" required style="padding: 1rem; border-radius: 60px;">
+        <input type="time" id="appTime" required style="padding: 1rem; border-radius: 60px;">
+        <textarea id="notes" placeholder="Additional Notes" rows="3" style="border-radius: 24px; padding:1rem;"></textarea>
+        <button type="submit" class="btn-primary" style="padding: 1rem; border-radius: 60px; font-weight: bold; border: none; cursor: pointer;">Confirm Appointment</button>
+      </div>
+    </form>
+    <div id="successModal" style="display: none; position: fixed; inset:0; background: rgba(0,0,0,0.6); justify-content: center; align-items: center; z-index: 2000;"><div style="background: white; padding: 2rem; border-radius: 32px; text-align: center;"><i class="fas fa-check-circle" style="font-size: 4rem; color:#B76E79;"></i><h3>Appointment Booked!</h3><p>We'll contact you shortly.</p><button onclick="closeModal()" style="margin-top:1rem; padding:0.6rem 1.5rem; background:#111; color:white; border-radius:40px;">Close</button></div></div>
+  </div>
+</section>
+
+<!-- CONTACT & MAP -->
+<section id="contact" style="padding: 5rem 2rem; background: #111111; color: white;">
+  <div class="container" style="max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 3rem;">
+    <div data-aos="fade-right">
+      <h3 style="font-size: 2rem; color: #D4AF37;">Visit Us</h3>
+      <p style="margin: 1rem 0;"><i class="fas fa-map-marker-alt" style="color:#B76E79; width: 30px;"></i> Plot No. 910 & 917, 1st Floor, Bidyut Marg, Madhusudan Nagar, Nayapalli, Bhubaneswar, Odisha – 751012</p>
+      <p><i class="fas fa-phone-alt"></i> <a href="tel:+918280955905" style="color:white; text-decoration: none;">082809 55905</a></p>
+      <p><i class="fas fa-clock"></i> Open Daily until 8:00 PM</p>
+      <div style="margin-top: 2rem;">
+        <a href="https://wa.me/918280955905" style="background:#25D366; padding:0.8rem 2rem; border-radius: 40px; display: inline-block; color: white; text-decoration: none;"><i class="fab fa-whatsapp"></i> WhatsApp Us</a>
+      </div>
+    </div>
+    <div data-aos="fade-left">
+      <iframe src="https://maps.google.com/maps?q=Bhubaneswar+Nayapalli+Odisha&z=14&output=embed" width="100%" height="250" style="border:0; border-radius: 24px;" allowfullscreen></iframe>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer style="background: #0a0a0a; color: #aaa; padding: 3rem 2rem 1rem;">
+  <div class="container" style="max-width: 1200px; margin:0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px,1fr)); gap: 2rem;">
+    <div><i class="fas fa-spa" style="color:#D4AF37;"></i> <strong>RS SALON</strong><p>Female's Exclusive</p><p>Reveal Your Most Beautiful Self</p></div>
+    <div><h4>Quick Links</h4><a href="#home" style="color:#aaa; display:block;">Home</a><a href="#services">Services</a><a href="#gallery">Gallery</a></div>
+    <div><h4>Contact</h4><p>📞 082809 55905</p><p>✉️ hello@rssalon.com</p></div>
+    <div><h4>Follow Us</h4><i class="fab fa-instagram" style="font-size:1.5rem; margin-right:1rem;"></i><i class="fab fa-facebook"></i><i class="fab fa-youtube"></i></div>
+  </div>
+  <hr style="margin: 2rem 0; border-color:#333;"><p style="text-align:center;">© 2026 RS SALON. All rights reserved. | Luxury Redefined</p>
+</footer>
+
+<!-- BACK TO TOP BUTTON -->
+<button onclick="scrollToTop()" id="backToTop" style="position: fixed; bottom: 80px; right: 20px; background:#B76E79; border:none; color:white; border-radius:50%; width: 48px; height:48px; display: none; cursor:pointer; box-shadow:0 4px 12px rgba(0,0,0,0.2);"><i class="fas fa-arrow-up"></i></button>
+
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+  AOS.init({ duration: 800, once: true, offset: 100 });
+  
+  // Counter animation
+  let countersAnimated = false;
+  const animateCounters = () => {
+    if(countersAnimated) return;
+    countersAnimated = true;
+    const counters = document.querySelectorAll('.counter');
+    counters.forEach(counter => {
+      const target = parseFloat(counter.getAttribute('data-target'));
+      let current = 0;
+      const increment = target / 40;
+      const updateCount = () => {
+        if (current < target) {
+          current = Math.min(current + increment, target);
+          counter.innerText = target % 1 !== 0 ? current.toFixed(1) : Math.floor(current);
+          setTimeout(updateCount, 25);
+        } else {
+          counter.innerText = target;
+        }
+      };
+      updateCount();
+    });
+  };
+  
+  window.addEventListener('scroll', function checkVisible() {
+    const statsSection = document.querySelector('.counter')?.closest('section');
+    if(statsSection && statsSection.getBoundingClientRect().top < window.innerHeight - 100) {
+      animateCounters();
+      window.removeEventListener('scroll', checkVisible);
+    }
+  });
+  
+  // Navbar shrink
+  window.addEventListener('scroll', () => {
+    const nav = document.getElementById('navbar');
+    if(window.scrollY > 50) nav.style.boxShadow = '0 4px 20px rgba(0,0,0,0.1)';
+    else nav.style.boxShadow = '0 2px 15px rgba(0,0,0,0.05)';
+    const backBtn = document.getElementById('backToTop');
+    if(window.scrollY > 400) backBtn.style.display = 'flex';
+    else backBtn.style.display = 'none';
+  });
+  function scrollToTop() { window.scrollTo({top:0, behavior:'smooth'}); }
+  
+  // Testimonial Carousel
+  let slideIndex = 0;
+  const track = document.getElementById('testimonialTrack');
+  const dots = document.querySelectorAll('.dot');
+  const totalSlides = 6;
+  function updateCarousel() {
+    if(track) track.style.transform = `translateX(-${slideIndex * 100}%)`;
+    dots.forEach((dot, idx) => dot.classList.toggle('active', idx === slideIndex));
+  }
+  function currentSlide(index) { slideIndex = index; updateCarousel(); }
+  setInterval(() => { slideIndex = (slideIndex+1) % totalSlides; updateCarousel(); }, 4000);
+  if(track) updateCarousel();
+  
+  // Lightbox
+  function openLightbox(imgSrc) {
+    const lb = document.getElementById('lightbox');
+    const lbImg = document.getElementById('lightbox-img');
+    lbImg.src = imgSrc;
+    lb.classList.add('active');
+  }
+  function closeLightbox() { document.getElementById('lightbox').classList.remove('active'); }
+  
+  // Booking Modal
+  function handleBooking(e) {
+    e.preventDefault();
+    const name = document.getElementById('fullName').value;
+    if(name) {
+      const modal = document.getElementById('successModal');
+      modal.style.display = 'flex';
+      setTimeout(() => closeModal(), 3000);
+      e.target.reset();
+    }
+  }
+  function closeModal() { document.getElementById('successModal').style.display = 'none'; }
+  
+  // Mobile menu toggle
+  function toggleMobileMenu() {
+    const menu = document.getElementById('mobileMenu');
+    menu.style.display = menu.style.display === 'flex' ? 'none' : 'flex';
+  }
+  
+  // WhatsApp floating button
+  const waBtn = document.createElement('a');
+  waBtn.href = 'https://wa.me/918280955905?text=Hello%20RS%20SALON%2C%20I%20want%20to%20book%20an%20appointment.';
+  waBtn.target = '_blank';
+  waBtn.innerHTML = '<i class="fab fa-whatsapp" style="font-size:28px;"></i>';
+  waBtn.style.position = 'fixed'; waBtn.style.bottom = '20px'; waBtn.style.left = '20px';
+  waBtn.style.background = '#25D366'; waBtn.style.color = 'white'; waBtn.style.width = '56px'; waBtn.style.height = '56px';
+  waBtn.style.borderRadius = '50%'; waBtn.style.display = 'flex'; waBtn.style.alignItems = 'center'; waBtn.style.justifyContent = 'center';
+  waBtn.style.boxShadow = '0 4px 12px rgba(0,0,0,0.2)'; waBtn.style.zIndex = '99';
+  document.body.appendChild(waBtn);
+</script>
+<style>
+  .dot { width: 10px; height: 10px; background: #ccc; border-radius: 50%; display: inline-block; margin: 0 4px; cursor: pointer; transition: 0.3s; }
+  .dot.active { background: #B76E79; width: 28px; border-radius: 5px; }
+  @keyframes bounce { 0%,100%{transform:translateY(0);} 50%{transform:translateY(8px);} }
+  .fa-star { color: #D4AF37; }
+  .testimonial-card p { font-size: 1rem; line-height: 1.5; }
+  @media (max-width: 768px) {
+    .testimonial-card { padding: 1.5rem; }
+    .hero-title { font-size: 2.5rem; }
+  }
+</style>
+</body>
+</html>
